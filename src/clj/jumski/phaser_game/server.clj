@@ -4,6 +4,7 @@
             [compojure.route :refer (resources)]
             [compojure.core :refer (GET defroutes)]
             ring.adapter.jetty
+            [ring.middleware.file :refer (wrap-file)]
             [clojure.java.io :as io]))
 
 (enlive/deftemplate page
@@ -16,9 +17,10 @@
   (resources "/")
   (GET "/*" req (page)))
 
+(def wrapped-site (wrap-file site "resources"))
+
 (defn run
   []
   (defonce ^:private server
-    (ring.adapter.jetty/run-jetty #'site {:port 8080 :join? false}))
+    (ring.adapter.jetty/run-jetty #'wrapped-site {:port 8080 :join? false}))
   server)
-
