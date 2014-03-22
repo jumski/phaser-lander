@@ -1,3 +1,4 @@
-(ns jumski.phaser_game.game)
+(ns jumski.phaser_game.game
+  (:require [clojure.browser.repl]))
 
-(def dupa (cljs->js {:omg "hax"}))
+(defn yoflaki [] (js/alert "Yo flaki!"))
