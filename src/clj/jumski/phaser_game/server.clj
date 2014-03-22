@@ -17,7 +17,7 @@
   (resources "/")
   (GET "/*" req (page)))
 
-(def wrapped-site (wrap-file site "resources"))
+(def wrapped-site (wrap-file site "resources/public"))
 
 (defn run
   []

@@ -7,14 +7,14 @@
         <!-- <script src="/jquery&#45;2.0.3.min.js" type="text/javascript"></script> -->
     </head>
     <body>
-    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
-    <hr/>
-    <pre>(run)</pre>
-    <pre>(def repl-env (reset! cemerick.austin.repls/browser-repl-env
-          (cemerick.austin/repl-env)))</pre>
-    <pre>(cemerick.austin.repls/cljs-repl repl-env)</pre></li>
+
+    <div id="main"></div>
+    <pre>
+        (run)
+        (def repl-env (reset! cemerick.austin.repls/browser-repl-env
+            (cemerick.austin/repl-env)))
+        (cemerick.austin.repls/cljs-repl repl-env)
+    </pre>
     <hr/>
         <h1>Sample project demonstrating real-world usage of <a
                 href="http://github.com/cemerick/austin">Austin</a>'s browser-connected REPL
