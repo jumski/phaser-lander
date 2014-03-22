@@ -1,4 +1,5 @@
 {
+  "src/clj/jumski/phaser_game/*.clj": {"command": "src"},
   "src/cljs/jumski/phaser_game/*.cljs": {"command": "js"},
   "resources/*.html": {"command": "html"},
   "project.clj": {"command": "project"}
