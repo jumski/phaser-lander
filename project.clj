@@ -6,7 +6,7 @@
                  [compojure "1.1.6"]
                  [enlive "1.1.5"]]
 
-  :profiles {:dev {:repl-options {:init-ns jumski.phaser_game.server}
+  :profiles {:dev {:repl-options {:init-ns jumski.phaser_lander.server}
                    :plugins [[com.cemerick/austin "0.1.3"]
                              [lein-cljsbuild "1.0.1"]]
                    :cljsbuild {:builds [{:source-paths ["src/cljs"]

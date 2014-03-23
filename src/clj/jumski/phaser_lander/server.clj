@@ -1,4 +1,4 @@
-(ns jumski.phaser_game.server
+(ns jumski.phaser_lander.server
   (:require [cemerick.austin.repls :refer (browser-connected-repl-js)]
             [net.cgrand.enlive-html :as enlive]
             [compojure.route :refer (resources)]

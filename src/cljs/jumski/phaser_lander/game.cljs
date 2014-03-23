@@ -1,4 +1,4 @@
-(ns jumski.phaser_game.game
+(ns jumski.phaser_lander.game
   (:require [clojure.browser.repl]))
 
 (defn log [thing] (.log js/console thing))
