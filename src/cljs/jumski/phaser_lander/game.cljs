@@ -1,10 +1,6 @@
 (ns jumski.phaser_lander.game
   (:require [clojure.browser.repl]))
 
-(defn log [thing] (.log js/console thing))
-
-(defn yoflaki [] (js/alert "Yo flaki!"))
-
 (def sprites (clj->js []))
 (aset js/window "sprites" sprites)
 
@@ -26,13 +22,6 @@
     (.push sprites sprite)
     sprite))
 
-;; sprite = game.add.sprite(32, 450, 'lander');
-;; sprite.x = 400;
-;; sprite.y = 400;
-;; sprite.anchor.x = 64
-;; sprite.anchor.y = 180
-;; game.camera.follow(sprite, Phaser.Camera.FOLLOW_LOCKON);
-
 (defn create [game]
   (let [stage (aget game "stage")
         world (aget game "world")
@@ -48,16 +37,6 @@
         (aset grav "y" 3))
       (create-lander game))))
 
-  ;; window.s = sprite;
-  ;; window.b = sprite.body;
-
-  ;; game.physics.enable( [sprite], Phaser.Physics.ARCADE);
-  ;; // game.physics.p2.enable(sprite);
-
-  ;; // sprite.body.fixedRotation = true;
-
-  ;; text = game.add.text(20, 20, 'click to the left / right of the ship', { fill: '#ffffff', font: '14pt Arial' });
-
 (defn preload [game]
   (let [load (aget game "load")]
     (.image load "lander" "lander.png")
@@ -71,4 +50,3 @@
 (def bg-color "#009999")
 
 (def game (js/Phaser.Game. height width mode parent-element opts))
-(.log js/console (rand-int 100))
