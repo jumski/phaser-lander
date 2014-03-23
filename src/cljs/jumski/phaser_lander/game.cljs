@@ -1,8 +1,7 @@
 (ns jumski.phaser_lander.game
   (:require [clojure.browser.repl]))
 
-(def sprites (clj->js []))
-(aset js/window "sprites" sprites)
+(def lander (atom nil))
 
 (defn create-lander [game]
   (let [add    (aget game "add")
@@ -17,7 +16,8 @@
     (aset anchor "y" 30)
     (.follow camera sprite js/Phaser.Camera.FOLLOW_LOCKON)
     (.enable p2 sprite)
-    (.push sprites sprite)
+    (reset! lander sprite)
+    (aset js/window "s" sprite)
     sprite))
 
 (defn create [game]
@@ -40,8 +40,27 @@
     (.image load "lander" "lander.png")
     (.image load "background" "space01.png")))
 
-(defn update [game]
-  )
+(def keymap {:up js/Phaser.Keyboard.UP
+             :down js/Phaser.Keyboard.DOWN
+             :left js/Phaser.Keyboard.LEFT
+             :right js/Phaser.Keyboard.RIGHT})
+
+(defn is-down [game akey]
+  (let [input (.-input game)
+        keyb (.-keyboard input)]
+  (.isDown keyb (keymap akey))))
+
+(defn update [game])
+  ;; (let [angle-delta 1
+  ;;       rotation-direction (cond (is-down game :left) -1
+  ;;                                (is-down game :right) 1
+  ;;                                :else 0)
+  ;;       old-angle (.-angle @lander)
+  ;;       new-angle (+ old-angle (* angle-delta rotation-direction))
+  ;;       lndr @lander]
+  ;;   ;; (.log js/console "newangle" new-angle)
+  ;;   (aset lndr "angle" new-angle)
+  ;;   (reset! lander lndr)))
 
 (def opts (clj->js {:preload preload :create create :update update}))
 (def height 800)
