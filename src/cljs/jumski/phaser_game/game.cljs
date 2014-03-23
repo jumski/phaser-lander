@@ -5,6 +5,9 @@
 
 (defn yoflaki [] (js/alert "Yo flaki!"))
 
+(def sprites (clj->js []))
+(aset js/window "sprites" sprites)
+
 (defn create-lander [game]
   (let [add    (aget game "add")
         sprite (.sprite add 32 450 "lander")
@@ -17,7 +20,11 @@
     (aset anchor "x" 30)
     (aset anchor "y" 30)
     (.follow camera sprite js/Phaser.Camera.FOLLOW_LOCKON)
-    (.enable p2 sprite)))
+    (.enable p2 sprite)
+    (aset sprite "fixedRotation" true)
+    (aset sprite "rotation" (rand-int 100))
+    (.push sprites sprite)
+    sprite))
 
 ;; sprite = game.add.sprite(32, 450, 'lander');
 ;; sprite.x = 400;
@@ -58,3 +65,4 @@
 (def bg-color "#009999")
 
 (def game (js/Phaser.Game. height width mode parent-element opts))
+(.log js/console (rand-int 100))
