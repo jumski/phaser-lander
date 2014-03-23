@@ -5,33 +5,40 @@
 
 (defn yoflaki [] (js/alert "Yo flaki!"))
 
+(defn create-lander [game]
+  (let [add    (aget game "add")
+        sprite (.sprite add 32 450 "lander")
+        anchor (aget sprite "anchor")
+        camera (aget game "camera")
+        phys   (aget game "physics")
+        p2     (aget phys "p2")]
+    (aset sprite "x" 400)
+    (aset sprite "y" 400)
+    (aset anchor "x" 30)
+    (aset anchor "y" 30)
+    (.follow camera sprite js/Phaser.Camera.FOLLOW_LOCKON)
+    (.enable p2 sprite)))
+
+;; sprite = game.add.sprite(32, 450, 'lander');
+;; sprite.x = 400;
+;; sprite.y = 400;
+;; sprite.anchor.x = 64
+;; sprite.anchor.y = 180
+;; game.camera.follow(sprite, Phaser.Camera.FOLLOW_LOCKON);
+
 (defn create [game]
-  (let [stage (aget game "stage")]
-    (aset stage "backgroundColor" "#009999"))
-  ;; //  Enable p2 physics
-  ;; game.physics.startSystem(Phaser.Physics.Arcade);
-  ;; // game.physics.startSystem(Phaser.Physics.P2JS);
-
-  ;; game.world.setBounds(0, 0, 800, 800);
-
-  ;; // game.stage.backgroundColor = '#124184';
-  ;; game.stage.backgroundColor = '#000';
-  ;; // background = game.add.tileSprite(0, 0, 1000, 900, "background");
-
-  ;; bmd = game.add.bitmapData(800, 600);
-  ;; bmd.context.fillStyle = '#ffffff';
-
-  ;; var bg = game.add.sprite(0, 0, bmd);
-
-  ;; // game.physics.p2.gravity.y = 3;
-  ;; // game.physics.p2.defaultRestitution = 0.8;
-
-  ;; sprite = game.add.sprite(32, 450, 'lander');
-  ;; sprite.x = 400;
-  ;; sprite.y = 400;
-  ;; sprite.anchor.x = 64
-  ;; sprite.anchor.y = 180
-  ;; game.camera.follow(sprite, Phaser.Camera.FOLLOW_LOCKON);
+  (let [stage (aget game "stage")
+        world (aget game "world")
+        physics (aget game "physics")
+        ]
+    (do
+      (aset stage "backgroundColor" "#009999")
+      (.setBounds world 0 0 800 800)
+      (.startSystem physics js/Phaser.Physics.P2JS)
+      (let [p2 (aget physics "p2")
+            grav (aget p2 "gravity")]
+        (aset grav "y" 3))
+      (create-lander game))))
 
   ;; window.s = sprite;
   ;; window.b = sprite.body;
@@ -42,7 +49,6 @@
   ;; // sprite.body.fixedRotation = true;
 
   ;; text = game.add.text(20, 20, 'click to the left / right of the ship', { fill: '#ffffff', font: '14pt Arial' });
-  )
 
 (def opts (clj->js {:preload (fn []) :create create :update (fn [])}))
 (def height 800)
