@@ -37,9 +37,10 @@
   (let [stage (aget game "stage")
         world (aget game "world")
         physics (aget game "physics")
-        ]
+        add (aget game "add")]
     (do
       (aset stage "backgroundColor" "#009999")
+      (.tileSprite add 0 0 1000 900 "background")
       (.setBounds world 0 0 800 800)
       (.startSystem physics js/Phaser.Physics.P2JS)
       (let [p2 (aget physics "p2")
@@ -57,7 +58,12 @@
 
   ;; text = game.add.text(20, 20, 'click to the left / right of the ship', { fill: '#ffffff', font: '14pt Arial' });
 
-(def opts (clj->js {:preload (fn []) :create create :update (fn [])}))
+(defn preload [game]
+  (let [load (aget game "load")]
+    (.image load "lander" "lander.png")
+    (.image load "background" "space01.png")))
+
+(def opts (clj->js {:preload preload :create create :update (fn [])}))
 (def height 800)
 (def width 600)
 (def parent-element "main")
