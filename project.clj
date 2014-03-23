@@ -1,4 +1,4 @@
-(defproject com.cemerick/austin-repl-sample "NOT_DEPLOYED"
+(defproject jumski/phaser_lander "NOT_DEPLOYED"
   :source-paths ["src/clj" "src/cljs"]
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/clojurescript "0.0-2138"]
