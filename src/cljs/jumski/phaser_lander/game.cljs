@@ -17,8 +17,6 @@
     (aset anchor "y" 30)
     (.follow camera sprite js/Phaser.Camera.FOLLOW_LOCKON)
     (.enable p2 sprite)
-    (aset sprite "fixedRotation" true)
-    (aset sprite "rotation" (rand-int 100))
     (.push sprites sprite)
     sprite))
 
