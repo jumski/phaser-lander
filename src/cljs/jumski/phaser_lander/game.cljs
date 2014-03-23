@@ -42,7 +42,10 @@
     (.image load "lander" "lander.png")
     (.image load "background" "space01.png")))
 
-(def opts (clj->js {:preload preload :create create :update (fn [])}))
+(defn update [game]
+  )
+
+(def opts (clj->js {:preload preload :create create :update update}))
 (def height 800)
 (def width 600)
 (def parent-element "main")
